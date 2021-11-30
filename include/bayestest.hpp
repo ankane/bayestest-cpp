@@ -55,8 +55,10 @@ double prob_c_beats_ab(int alpha_a, int beta_a, int alpha_b, int beta_b, int alp
     }
   }
 
-  return 1 - prob_b_beats_a(alpha_c, beta_c, alpha_a, beta_a) -
-    prob_b_beats_a(alpha_c, beta_c, alpha_b, beta_b) + total;
+  return 1
+    - prob_b_beats_a(alpha_c, beta_c, alpha_a, beta_a)
+    - prob_b_beats_a(alpha_c, beta_c, alpha_b, beta_b)
+    + total;
 }
 
 double prob_d_beats_abc(int alpha_a, int beta_a, int alpha_b, int beta_b, int alpha_c, int beta_c, int alpha_d, int beta_d) {
@@ -98,12 +100,14 @@ double prob_d_beats_abc(int alpha_a, int beta_a, int alpha_b, int beta_b, int al
     }
   }
 
-  return 1 - prob_b_beats_a(alpha_a, beta_a, alpha_d, beta_d) -
-    prob_b_beats_a(alpha_b, beta_b, alpha_d, beta_d) -
-    prob_b_beats_a(alpha_c, beta_c, alpha_d, beta_d) +
-    prob_c_beats_ab(alpha_a, beta_a, alpha_b, beta_b, alpha_d, beta_d) +
-    prob_c_beats_ab(alpha_a, beta_a, alpha_c, beta_c, alpha_d, beta_d) +
-    prob_c_beats_ab(alpha_b, beta_b, alpha_c, beta_c, alpha_d, beta_d) - total;
+  return 1
+    - prob_b_beats_a(alpha_a, beta_a, alpha_d, beta_d)
+    - prob_b_beats_a(alpha_b, beta_b, alpha_d, beta_d)
+    - prob_b_beats_a(alpha_c, beta_c, alpha_d, beta_d)
+    + prob_c_beats_ab(alpha_a, beta_a, alpha_b, beta_b, alpha_d, beta_d)
+    + prob_c_beats_ab(alpha_a, beta_a, alpha_c, beta_c, alpha_d, beta_d)
+    + prob_c_beats_ab(alpha_b, beta_b, alpha_c, beta_c, alpha_d, beta_d)
+    - total;
 }
 
 double prob_1_beats_2(int alpha_1, int beta_1, int alpha_2, int beta_2) {
@@ -142,8 +146,10 @@ double prob_1_beats_23(int alpha_1, int beta_1, int alpha_2, int beta_2, int alp
     }
   }
 
-  return 1.0 - prob_1_beats_2(alpha_2, beta_2, alpha_1, beta_1)
-    - prob_1_beats_2(alpha_3, beta_3, alpha_1, beta_1) + total;
+  return 1
+    - prob_1_beats_2(alpha_2, beta_2, alpha_1, beta_1)
+    - prob_1_beats_2(alpha_3, beta_3, alpha_1, beta_1)
+    + total;
 }
 
 class BinaryTest {
