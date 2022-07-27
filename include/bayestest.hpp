@@ -239,7 +239,7 @@ public:
 
 private:
   struct Variant {
-    Variant(int participants, int conversions) : participants(participants), conversions(conversions) {};
+    Variant(int participants, int conversions) : participants(participants), conversions(conversions) {}
     int participants;
     int conversions;
   };
@@ -308,7 +308,7 @@ public:
 
 private:
   struct Variant {
-    Variant(int events, int exposure) : events(events), exposure(exposure) {};
+    Variant(int events, int exposure) : events(events), exposure(exposure) {}
     int events;
     int exposure;
   };
