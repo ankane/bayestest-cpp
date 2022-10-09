@@ -9,5 +9,5 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
-    - run: g++ -std=c++11 -o test/main test/main.cpp
+    - run: g++ -std=c++11 -Wall -Wextra -Werror -o test/main test/main.cpp
     - run: test/main

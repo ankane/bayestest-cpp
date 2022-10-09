@@ -61,6 +61,6 @@ To get started with development:
 ```sh
 git clone https://github.com/ankane/bayestest-cpp.git
 cd bayestest-cpp
-g++ -std=c++11 -o test/main test/main.cpp
+g++ -std=c++11 -Wall -Wextra -Werror -o test/main test/main.cpp
 test/main
 ```
