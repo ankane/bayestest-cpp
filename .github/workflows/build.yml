@@ -8,6 +8,6 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-2019]
     runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v3
-    - run: g++ -std=c++11 -Wall -Wextra -Werror -o test/main test/main.cpp
-    - run: test/main
+      - uses: actions/checkout@v3
+      - run: g++ -std=c++11 -Wall -Wextra -Werror -o test/main test/main.cpp
+      - run: test/main
