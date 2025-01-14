@@ -10,11 +10,7 @@ Also available in [Rust](https://github.com/ankane/bayestest-rust)
 
 ## Installation
 
-Include [the header](https://raw.githubusercontent.com/ankane/bayestest-cpp/v0.1.0/include/bayestest.hpp) in your project (supports C++11 and greater).
-
-```cpp
-#include "bayestest.hpp"
-```
+Add [the header](https://raw.githubusercontent.com/ankane/bayestest-cpp/v0.1.0/include/bayestest.hpp) to your project (supports C++11 and greater).
 
 There is also experimental support for CMake and FetchContent:
 
@@ -28,6 +24,12 @@ target_link_libraries(app PRIVATE bayestest::bayestest)
 ```
 
 ## Getting Started
+
+Include the header
+
+```cpp
+#include "bayestest.hpp"
+```
 
 - [Binary outcomes](#binary-outcomes), like conversion rate
 - [Count data](#count-data), like number of sales per salesperson
