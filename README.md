@@ -10,7 +10,7 @@ Also available in [Rust](https://github.com/ankane/bayestest-rust)
 
 ## Installation
 
-Include [the header](https://raw.githubusercontent.com/ankane/bayestest-cpp/v0.1.0/include/bayestest.hpp) in your project
+Include [the header](https://raw.githubusercontent.com/ankane/bayestest-cpp/v0.1.0/include/bayestest.hpp) in your project (supports C++11 and greater).
 
 ```cpp
 #include "bayestest.hpp"
