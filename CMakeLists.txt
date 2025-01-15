@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.18)
 
-project(bayestest VERSION 0.1.0 LANGUAGES CXX)
+project(bayestest VERSION 0.1.1 LANGUAGES CXX)
 
 include(GNUInstallDirs)
 

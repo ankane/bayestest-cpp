@@ -10,14 +10,14 @@ Also available in [Rust](https://github.com/ankane/bayestest-rust)
 
 ## Installation
 
-Add [the header](https://raw.githubusercontent.com/ankane/bayestest-cpp/v0.1.0/include/bayestest.hpp) to your project (supports C++11 and greater).
+Add [the header](https://raw.githubusercontent.com/ankane/bayestest-cpp/v0.1.1/include/bayestest.hpp) to your project (supports C++11 and greater).
 
 There is also support for CMake and FetchContent:
 
 ```cmake
 include(FetchContent)
 
-FetchContent_Declare(bayestest GIT_REPOSITORY https://github.com/ankane/bayestest-cpp.git GIT_TAG 758400cf9f9c601d09ebda7fc9bb84a4cb9c367d)
+FetchContent_Declare(bayestest GIT_REPOSITORY https://github.com/ankane/bayestest-cpp.git GIT_TAG v0.1.1)
 FetchContent_MakeAvailable(bayestest)
 
 target_link_libraries(app PRIVATE bayestest::bayestest)
