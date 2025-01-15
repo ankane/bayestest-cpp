@@ -12,7 +12,7 @@ Also available in [Rust](https://github.com/ankane/bayestest-rust)
 
 Add [the header](https://raw.githubusercontent.com/ankane/bayestest-cpp/v0.1.0/include/bayestest.hpp) to your project (supports C++11 and greater).
 
-There is also experimental support for CMake and FetchContent:
+There is also support for CMake and FetchContent:
 
 ```cmake
 include(FetchContent)
