@@ -156,12 +156,15 @@ double prob_1_beats_23(int alpha_1, int beta_1, int alpha_2, int beta_2, int alp
 
 }
 
+/// A test for binary outcomes.
 class BinaryTest {
 public:
+  /// Adds a new variant.
   void add(int participants, int conversions) {
     variants.emplace_back(participants, conversions);
   }
 
+  /// Returns the winning probability of each variant.
   std::vector<double> probabilities() {
     std::vector<double> probs;
     probs.reserve(variants.size());
@@ -251,12 +254,15 @@ private:
   std::vector<Variant> variants;
 };
 
+/// A test for count data.
 class CountTest {
 public:
+  /// Adds a new variant.
   void add(int events, int exposure) {
     variants.emplace_back(events, exposure);
   }
 
+  /// Returns the winning probability of each variant.
   std::vector<double> probabilities() {
     std::vector<double> probs;
     probs.reserve(variants.size());
