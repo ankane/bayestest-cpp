@@ -11,6 +11,8 @@
 
 namespace bayestest {
 
+namespace {
+
 double logbeta(double a, double b) {
   return std::lgamma(a) + std::lgamma(b) - std::lgamma(a + b);
 }
@@ -150,6 +152,8 @@ double prob_1_beats_23(int alpha_1, int beta_1, int alpha_2, int beta_2, int alp
     - prob_1_beats_2(alpha_2, beta_2, alpha_1, beta_1)
     - prob_1_beats_2(alpha_3, beta_3, alpha_1, beta_1)
     + total;
+}
+
 }
 
 class BinaryTest {
