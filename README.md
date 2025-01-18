@@ -1,4 +1,4 @@
-## BayesTest C++
+# BayesTest C++
 
 Bayesian A/B testing calculations for C++
 
