@@ -165,7 +165,7 @@ public:
   }
 
   /// Returns the winning probability of each variant.
-  std::vector<double> probabilities() {
+  std::vector<double> probabilities() const {
     std::vector<double> probs;
     probs.reserve(variants.size());
 
@@ -263,7 +263,7 @@ public:
   }
 
   /// Returns the winning probability of each variant.
-  std::vector<double> probabilities() {
+  std::vector<double> probabilities() const {
     std::vector<double> probs;
     probs.reserve(variants.size());
 
