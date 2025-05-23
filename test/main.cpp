@@ -1,4 +1,6 @@
 #include <cassert>
+#include <vector>
+
 #include "../include/bayestest.hpp"
 
 using bayestest::BinaryTest;
