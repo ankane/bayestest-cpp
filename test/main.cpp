@@ -5,11 +5,11 @@
 
 using bayestest::BinaryTest;
 using bayestest::CountTest;
-using bayestest::prob_b_beats_a;
-using bayestest::prob_c_beats_ab;
-using bayestest::prob_d_beats_abc;
-using bayestest::prob_1_beats_2;
-using bayestest::prob_1_beats_23;
+using bayestest::detail::prob_b_beats_a;
+using bayestest::detail::prob_c_beats_ab;
+using bayestest::detail::prob_d_beats_abc;
+using bayestest::detail::prob_1_beats_2;
+using bayestest::detail::prob_1_beats_23;
 
 void assert_approx(double act, double exp) {
   assert(abs(act - exp) < 0.0000000001);

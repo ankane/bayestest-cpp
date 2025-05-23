@@ -11,7 +11,7 @@
 
 namespace bayestest {
 
-namespace {
+namespace detail {
 
 double logbeta(double a, double b) {
   return std::lgamma(a) + std::lgamma(b) - std::lgamma(a + b);
@@ -154,11 +154,11 @@ double prob_1_beats_23(int alpha_1, int beta_1, int alpha_2, int beta_2, int alp
     + total;
 }
 
-}
+} // namespace detail
 
 /// A test for binary outcomes.
 class BinaryTest {
-public:
+ public:
   /// Adds a new variant.
   void add(int participants, int conversions) {
     variants.emplace_back(participants, conversions);
@@ -182,7 +182,7 @@ public:
         auto b = variants[0];
         auto a = variants[1];
 
-        auto prob = prob_b_beats_a(
+        auto prob = detail::prob_b_beats_a(
           1 + a.conversions,
           1 + a.participants - a.conversions,
           1 + b.conversions,
@@ -200,7 +200,7 @@ public:
             auto b = variants[(i + 1) % 3];
             auto a = variants[(i + 2) % 3];
 
-            auto prob = prob_c_beats_ab(
+            auto prob = detail::prob_c_beats_ab(
               1 + a.conversions,
               1 + a.participants - a.conversions,
               1 + b.conversions,
@@ -224,7 +224,7 @@ public:
             auto b = variants[(i + 2) % 4];
             auto a = variants[(i + 3) % 4];
 
-            auto prob = prob_d_beats_abc(
+            auto prob = detail::prob_d_beats_abc(
               1 + a.conversions,
               1 + a.participants - a.conversions,
               1 + b.conversions,
@@ -244,7 +244,7 @@ public:
     return probs;
   }
 
-private:
+ private:
   struct Variant {
     Variant(int participants, int conversions) : participants(participants), conversions(conversions) {}
     int participants;
@@ -256,7 +256,7 @@ private:
 
 /// A test for count data.
 class CountTest {
-public:
+ public:
   /// Adds a new variant.
   void add(int events, int exposure) {
     variants.emplace_back(events, exposure);
@@ -280,7 +280,7 @@ public:
         auto a = variants[0];
         auto b = variants[1];
 
-        auto prob = prob_1_beats_2(
+        auto prob = detail::prob_1_beats_2(
           a.events,
           a.exposure,
           b.events,
@@ -298,7 +298,7 @@ public:
             auto b = variants[(i + 1) % 3];
             auto c = variants[(i + 2) % 3];
 
-            auto prob = prob_1_beats_23(
+            auto prob = detail::prob_1_beats_23(
               a.events,
               a.exposure,
               b.events,
@@ -316,7 +316,7 @@ public:
     return probs;
   }
 
-private:
+ private:
   struct Variant {
     Variant(int events, int exposure) : events(events), exposure(exposure) {}
     int events;
@@ -326,4 +326,4 @@ private:
   std::vector<Variant> variants;
 };
 
-}
+} // namespace bayestest
