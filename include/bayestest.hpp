@@ -13,11 +13,11 @@ namespace bayestest {
 
 namespace detail {
 
-double logbeta(double a, double b) {
+inline double logbeta(double a, double b) {
   return std::lgamma(a) + std::lgamma(b) - std::lgamma(a + b);
 }
 
-double prob_b_beats_a(int alpha_a, int beta_a, int alpha_b, int beta_b) {
+inline double prob_b_beats_a(int alpha_a, int beta_a, int alpha_b, int beta_b) {
   double total = 0.0;
   double logbeta_aa_ba = logbeta(alpha_a, beta_a);
   double beta_ba = beta_b + beta_a;
@@ -29,7 +29,7 @@ double prob_b_beats_a(int alpha_a, int beta_a, int alpha_b, int beta_b) {
   return total;
 }
 
-double prob_c_beats_ab(int alpha_a, int beta_a, int alpha_b, int beta_b, int alpha_c, int beta_c) {
+inline double prob_c_beats_ab(int alpha_a, int beta_a, int alpha_b, int beta_b, int alpha_c, int beta_c) {
   double total = 0.0;
 
   double logbeta_ac_bc = logbeta(alpha_c, beta_c);
@@ -63,7 +63,7 @@ double prob_c_beats_ab(int alpha_a, int beta_a, int alpha_b, int beta_b, int alp
     + total;
 }
 
-double prob_d_beats_abc(int alpha_a, int beta_a, int alpha_b, int beta_b, int alpha_c, int beta_c, int alpha_d, int beta_d) {
+inline double prob_d_beats_abc(int alpha_a, int beta_a, int alpha_b, int beta_b, int alpha_c, int beta_c, int alpha_d, int beta_d) {
   double total = 0.0;
 
   double logbeta_ad_bd = logbeta(alpha_d, beta_d);
@@ -112,7 +112,7 @@ double prob_d_beats_abc(int alpha_a, int beta_a, int alpha_b, int beta_b, int al
     - total;
 }
 
-double prob_1_beats_2(int alpha_1, int beta_1, int alpha_2, int beta_2) {
+inline double prob_1_beats_2(int alpha_1, int beta_1, int alpha_2, int beta_2) {
   double total = 0.0;
   double log_b1 = std::log(beta_1);
   double a2_log_b2 = alpha_2 * std::log(beta_2);
@@ -129,7 +129,7 @@ double prob_1_beats_2(int alpha_1, int beta_1, int alpha_2, int beta_2) {
   return total;
 }
 
-double prob_1_beats_23(int alpha_1, int beta_1, int alpha_2, int beta_2, int alpha_3, int beta_3) {
+inline double prob_1_beats_23(int alpha_1, int beta_1, int alpha_2, int beta_2, int alpha_3, int beta_3) {
   double total = 0.0;
 
   double log_b1_b2_b3 = std::log(beta_1 + beta_2 + beta_3);
