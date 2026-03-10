@@ -53,7 +53,7 @@ inline double prob_c_beats_ab(int alpha_a, int beta_a, int alpha_b, int beta_b, 
     double sum_i = -std::log(beta_a + i) - logbeta(1 + i, beta_a) - logbeta_ac_bc;
 
     for (int j = 0; j < alpha_b; j++) {
-      total += std::exp(sum_i + logbeta_ac_i_j[i + j] - log_bb_j_logbeta_j_bb[j]);
+      total += std::exp(sum_i + logbeta_ac_i_j.at(i + j) - log_bb_j_logbeta_j_bb.at(j));
     }
   }
 
@@ -94,10 +94,10 @@ inline double prob_d_beats_abc(int alpha_a, int beta_a, int alpha_b, int beta_b,
     double sum_i = -std::log(beta_a + i) - logbeta(1 + i, beta_a) - logbeta_ad_bd;
 
     for (int j = 0; j < alpha_b; j++) {
-      double sum_j = sum_i - log_bb_j_logbeta_j_bb[j];
+      double sum_j = sum_i - log_bb_j_logbeta_j_bb.at(j);
 
       for (int k = 0; k < alpha_c; k++) {
-        total += std::exp(sum_j + logbeta_bd_i_j_k[i + j + k] - log_bc_k_logbeta_k_bc[k]);
+        total += std::exp(sum_j + logbeta_bd_i_j_k.at(i + j + k) - log_bc_k_logbeta_k_bc.at(k));
       }
     }
   }
@@ -179,8 +179,8 @@ class BinaryTest {
         break;
       }
       case 2: {
-        const Variant& b = variants[0];
-        const Variant& a = variants[1];
+        const Variant& b = variants.at(0);
+        const Variant& a = variants.at(1);
 
         double prob = detail::prob_b_beats_a(
           1 + a.conversions,
@@ -196,9 +196,9 @@ class BinaryTest {
       case 3: {
         double total = 0.0;
         for (size_t i = 0; i < 2; i++) {
-          const Variant& c = variants[i];
-          const Variant& b = variants[(i + 1) % 3];
-          const Variant& a = variants[(i + 2) % 3];
+          const Variant& c = variants.at(i);
+          const Variant& b = variants.at((i + 1) % 3);
+          const Variant& a = variants.at((i + 2) % 3);
 
           double prob = detail::prob_c_beats_ab(
             1 + a.conversions,
@@ -219,10 +219,10 @@ class BinaryTest {
       default: {
         double total = 0.0;
         for (size_t i = 0; i < 3; i++) {
-          const Variant& d = variants[i];
-          const Variant& c = variants[(i + 1) % 4];
-          const Variant& b = variants[(i + 2) % 4];
-          const Variant& a = variants[(i + 3) % 4];
+          const Variant& d = variants.at(i);
+          const Variant& c = variants.at((i + 1) % 4);
+          const Variant& b = variants.at((i + 2) % 4);
+          const Variant& a = variants.at((i + 3) % 4);
 
           double prob = detail::prob_d_beats_abc(
             1 + a.conversions,
@@ -277,8 +277,8 @@ class CountTest {
         break;
       }
       case 2: {
-        const Variant& a = variants[0];
-        const Variant& b = variants[1];
+        const Variant& a = variants.at(0);
+        const Variant& b = variants.at(1);
 
         double prob = detail::prob_1_beats_2(
           a.events,
@@ -294,9 +294,9 @@ class CountTest {
       default: {
         double total = 0.0;
         for (size_t i = 0; i < 2; i++) {
-          const Variant& a = variants[i];
-          const Variant& b = variants[(i + 1) % 3];
-          const Variant& c = variants[(i + 2) % 3];
+          const Variant& a = variants.at(i);
+          const Variant& b = variants.at((i + 1) % 3);
+          const Variant& c = variants.at((i + 2) % 3);
 
           double prob = detail::prob_1_beats_23(
             a.events,
