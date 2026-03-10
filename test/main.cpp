@@ -16,19 +16,19 @@ void assert_approx(double act, double exp) {
 }
 
 void test_binary_no_variants() {
-  auto test = BinaryTest();
+  BinaryTest test;
   assert(test.probabilities().empty());
 }
 
 void test_binary_one_variant() {
-  auto test = BinaryTest();
+  BinaryTest test;
   test.add(2, 1);
   std::vector<double> expected = {1.0};
   assert(test.probabilities() == expected);
 }
 
 void test_binary_two_variants() {
-  auto test = BinaryTest();
+  BinaryTest test;
   test.add(200, 100);
   test.add(400, 250);
   auto probabilities = test.probabilities();
@@ -38,7 +38,7 @@ void test_binary_two_variants() {
 }
 
 void test_binary_three_variants() {
-  auto test = BinaryTest();
+  BinaryTest test;
   test.add(61, 15);
   test.add(54, 13);
   test.add(72, 19);
@@ -50,7 +50,7 @@ void test_binary_three_variants() {
 }
 
 void test_binary_four_variants() {
-  auto test = BinaryTest();
+  BinaryTest test;
   test.add(55, 50);
   test.add(30, 30);
   test.add(10, 10);
@@ -64,19 +64,19 @@ void test_binary_four_variants() {
 }
 
 void test_count_no_variants() {
-  auto test = CountTest();
+  CountTest test;
   assert(test.probabilities().empty());
 }
 
 void test_count_one_variant() {
-  auto test = CountTest();
+  CountTest test;
   test.add(2, 1);
   std::vector<double> expected = {1.0};
   assert(test.probabilities() == expected);
 }
 
 void test_count_two_variants() {
-  auto test = CountTest();
+  CountTest test;
   test.add(55, 50);
   test.add(30, 30);
   auto probabilities = test.probabilities();
@@ -86,7 +86,7 @@ void test_count_two_variants() {
 }
 
 void test_count_three_variants() {
-  auto test = CountTest();
+  CountTest test;
   test.add(55, 50);
   test.add(30, 30);
   test.add(10, 10);
