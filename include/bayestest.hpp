@@ -35,7 +35,7 @@ inline double prob_c_beats_ab(int alpha_a, int beta_a, int alpha_b, int beta_b, 
   double logbeta_ac_bc = logbeta(alpha_c, beta_c);
 
   std::vector<double> log_bb_j_logbeta_j_bb;
-  log_bb_j_logbeta_j_bb.reserve(alpha_b);
+  log_bb_j_logbeta_j_bb.reserve(static_cast<size_t>(alpha_b));
 
   for (int j = 0; j < alpha_b; j++) {
     log_bb_j_logbeta_j_bb.push_back(std::log(beta_b + j) + logbeta(1 + j, beta_b));
@@ -43,7 +43,7 @@ inline double prob_c_beats_ab(int alpha_a, int beta_a, int alpha_b, int beta_b, 
 
   double abc = beta_a + beta_b + beta_c;
   std::vector<double> logbeta_ac_i_j;
-  logbeta_ac_i_j.reserve(alpha_a + alpha_b);
+  logbeta_ac_i_j.reserve(static_cast<size_t>(alpha_a + alpha_b));
 
   for (int i = 0; i < alpha_a + alpha_b; i++) {
     logbeta_ac_i_j.push_back(logbeta(alpha_c + i, abc));
@@ -53,7 +53,7 @@ inline double prob_c_beats_ab(int alpha_a, int beta_a, int alpha_b, int beta_b, 
     double sum_i = -std::log(beta_a + i) - logbeta(1 + i, beta_a) - logbeta_ac_bc;
 
     for (int j = 0; j < alpha_b; j++) {
-      total += std::exp(sum_i + logbeta_ac_i_j.at(i + j) - log_bb_j_logbeta_j_bb.at(j));
+      total += std::exp(sum_i + logbeta_ac_i_j.at(static_cast<size_t>(i + j)) - log_bb_j_logbeta_j_bb.at(static_cast<size_t>(j)));
     }
   }
 
@@ -69,14 +69,14 @@ inline double prob_d_beats_abc(int alpha_a, int beta_a, int alpha_b, int beta_b,
   double logbeta_ad_bd = logbeta(alpha_d, beta_d);
 
   std::vector<double> log_bb_j_logbeta_j_bb;
-  log_bb_j_logbeta_j_bb.reserve(alpha_b);
+  log_bb_j_logbeta_j_bb.reserve(static_cast<size_t>(alpha_b));
 
   for (int j = 0; j < alpha_b; j++) {
     log_bb_j_logbeta_j_bb.push_back(std::log(beta_b + j) + logbeta(1 + j, beta_b));
   }
 
   std::vector<double> log_bc_k_logbeta_k_bc;
-  log_bc_k_logbeta_k_bc.reserve(alpha_c);
+  log_bc_k_logbeta_k_bc.reserve(static_cast<size_t>(alpha_c));
 
   for (int k = 0; k < alpha_c; k++) {
     log_bc_k_logbeta_k_bc.push_back(std::log(beta_c + k) + logbeta(1 + k, beta_c));
@@ -84,7 +84,7 @@ inline double prob_d_beats_abc(int alpha_a, int beta_a, int alpha_b, int beta_b,
 
   double abcd = beta_a + beta_b + beta_c + beta_d;
   std::vector<double> logbeta_bd_i_j_k;
-  logbeta_bd_i_j_k.reserve(alpha_a + alpha_b + alpha_c);
+  logbeta_bd_i_j_k.reserve(static_cast<size_t>(alpha_a + alpha_b + alpha_c));
 
   for (int i = 0; i < alpha_a + alpha_b + alpha_c; i++) {
     logbeta_bd_i_j_k.push_back(logbeta(alpha_d + i, abcd));
@@ -94,10 +94,10 @@ inline double prob_d_beats_abc(int alpha_a, int beta_a, int alpha_b, int beta_b,
     double sum_i = -std::log(beta_a + i) - logbeta(1 + i, beta_a) - logbeta_ad_bd;
 
     for (int j = 0; j < alpha_b; j++) {
-      double sum_j = sum_i - log_bb_j_logbeta_j_bb.at(j);
+      double sum_j = sum_i - log_bb_j_logbeta_j_bb.at(static_cast<size_t>(j));
 
       for (int k = 0; k < alpha_c; k++) {
-        total += std::exp(sum_j + logbeta_bd_i_j_k.at(i + j + k) - log_bc_k_logbeta_k_bc.at(k));
+        total += std::exp(sum_j + logbeta_bd_i_j_k.at(static_cast<size_t>(i + j + k)) - log_bc_k_logbeta_k_bc.at(static_cast<size_t>(k)));
       }
     }
   }
