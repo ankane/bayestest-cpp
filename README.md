@@ -40,7 +40,7 @@ Include the header
 bayestest::BinaryTest test;
 test.add(participants_a, conversions_a);
 test.add(participants_b, conversions_b);
-auto probabilities = test.probabilities();
+std::vector<double> probabilities = test.probabilities();
 ```
 
 Supports up to 4 variants
@@ -51,7 +51,7 @@ Supports up to 4 variants
 bayestest::CountTest test;
 test.add(events_a, exposure_a);
 test.add(events_b, exposure_b);
-auto probabilities = test.probabilities();
+std::vector<double> probabilities = test.probabilities();
 ```
 
 Supports up to 3 variants

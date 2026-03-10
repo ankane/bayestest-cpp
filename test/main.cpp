@@ -32,7 +32,7 @@ void test_binary_two_variants() {
   BinaryTest test;
   test.add(200, 100);
   test.add(400, 250);
-  auto probabilities = test.probabilities();
+  std::vector<double> probabilities = test.probabilities();
   assert(probabilities.size() == 2);
   assert_approx(probabilities[0], 0.001756431311879969);
   assert_approx(probabilities[1], 0.99824356868812);
@@ -43,7 +43,7 @@ void test_binary_three_variants() {
   test.add(61, 15);
   test.add(54, 13);
   test.add(72, 19);
-  auto probabilities = test.probabilities();
+  std::vector<double> probabilities = test.probabilities();
   assert(probabilities.size() == 3);
   assert_approx(probabilities[0], 0.29632930651329037);
   assert_approx(probabilities[1], 0.277257277195332);
@@ -56,7 +56,7 @@ void test_binary_four_variants() {
   test.add(30, 30);
   test.add(10, 10);
   test.add(50, 45);
-  auto probabilities = test.probabilities();
+  std::vector<double> probabilities = test.probabilities();
   assert(probabilities.size() == 4);
   assert_approx(probabilities[0], 0.02692341639320739);
   assert_approx(probabilities[1], 0.7040521621641954);
@@ -80,7 +80,7 @@ void test_count_two_variants() {
   CountTest test;
   test.add(55, 50);
   test.add(30, 30);
-  auto probabilities = test.probabilities();
+  std::vector<double> probabilities = test.probabilities();
   assert(probabilities.size() == 2);
   assert_approx(probabilities[0], 0.6710529663661625);
   assert_approx(probabilities[1], 0.3289470336338596);
@@ -91,7 +91,7 @@ void test_count_three_variants() {
   test.add(55, 50);
   test.add(30, 30);
   test.add(10, 10);
-  auto probabilities = test.probabilities();
+  std::vector<double> probabilities = test.probabilities();
   assert(probabilities.size() == 3);
   assert_approx(probabilities[0], 0.4633365654508068);
   assert_approx(probabilities[1], 0.2306153779716283);
