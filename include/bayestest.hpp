@@ -196,21 +196,21 @@ class BinaryTest {
       case 3: {
         double total = 0.0;
         for (size_t i = 0; i < 2; i++) {
-            const Variant& c = variants[i];
-            const Variant& b = variants[(i + 1) % 3];
-            const Variant& a = variants[(i + 2) % 3];
+          const Variant& c = variants[i];
+          const Variant& b = variants[(i + 1) % 3];
+          const Variant& a = variants[(i + 2) % 3];
 
-            double prob = detail::prob_c_beats_ab(
-              1 + a.conversions,
-              1 + a.participants - a.conversions,
-              1 + b.conversions,
-              1 + b.participants - b.conversions,
-              1 + c.conversions,
-              1 + c.participants - c.conversions
-            );
+          double prob = detail::prob_c_beats_ab(
+            1 + a.conversions,
+            1 + a.participants - a.conversions,
+            1 + b.conversions,
+            1 + b.participants - b.conversions,
+            1 + c.conversions,
+            1 + c.participants - c.conversions
+          );
 
-            probs.push_back(prob);
-            total += prob;
+          probs.push_back(prob);
+          total += prob;
         }
         probs.push_back(1 - total);
 
@@ -219,24 +219,24 @@ class BinaryTest {
       default: {
         double total = 0.0;
         for (size_t i = 0; i < 3; i++) {
-            const Variant& d = variants[i];
-            const Variant& c = variants[(i + 1) % 4];
-            const Variant& b = variants[(i + 2) % 4];
-            const Variant& a = variants[(i + 3) % 4];
+          const Variant& d = variants[i];
+          const Variant& c = variants[(i + 1) % 4];
+          const Variant& b = variants[(i + 2) % 4];
+          const Variant& a = variants[(i + 3) % 4];
 
-            double prob = detail::prob_d_beats_abc(
-              1 + a.conversions,
-              1 + a.participants - a.conversions,
-              1 + b.conversions,
-              1 + b.participants - b.conversions,
-              1 + c.conversions,
-              1 + c.participants - c.conversions,
-              1 + d.conversions,
-              1 + d.participants - d.conversions
-            );
+          double prob = detail::prob_d_beats_abc(
+            1 + a.conversions,
+            1 + a.participants - a.conversions,
+            1 + b.conversions,
+            1 + b.participants - b.conversions,
+            1 + c.conversions,
+            1 + c.participants - c.conversions,
+            1 + d.conversions,
+            1 + d.participants - d.conversions
+          );
 
-            probs.push_back(prob);
-            total += prob;
+          probs.push_back(prob);
+          total += prob;
         }
         probs.push_back(1 - total);
       }
@@ -294,21 +294,21 @@ class CountTest {
       default: {
         double total = 0.0;
         for (size_t i = 0; i < 2; i++) {
-            const Variant& a = variants[i];
-            const Variant& b = variants[(i + 1) % 3];
-            const Variant& c = variants[(i + 2) % 3];
+          const Variant& a = variants[i];
+          const Variant& b = variants[(i + 1) % 3];
+          const Variant& c = variants[(i + 2) % 3];
 
-            double prob = detail::prob_1_beats_23(
-              a.events,
-              a.exposure,
-              b.events,
-              b.exposure,
-              c.events,
-              c.exposure
-            );
+          double prob = detail::prob_1_beats_23(
+            a.events,
+            a.exposure,
+            b.events,
+            b.exposure,
+            c.events,
+            c.exposure
+          );
 
-            probs.push_back(prob);
-            total += prob;
+          probs.push_back(prob);
+          total += prob;
         }
         probs.push_back(1 - total);
       }
