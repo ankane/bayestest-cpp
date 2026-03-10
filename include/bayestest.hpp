@@ -22,7 +22,7 @@ inline double prob_b_beats_a(int alpha_a, int beta_a, int alpha_b, int beta_b) {
   double logbeta_aa_ba = logbeta(alpha_a, beta_a);
   double beta_ba = beta_b + beta_a;
 
-  for (auto i = 0; i < alpha_b; i++) {
+  for (int i = 0; i < alpha_b; i++) {
     total += std::exp(logbeta(alpha_a + i, beta_ba) - std::log(beta_b + i) - logbeta(1 + i, beta_b) - logbeta_aa_ba);
   }
 
@@ -37,7 +37,7 @@ inline double prob_c_beats_ab(int alpha_a, int beta_a, int alpha_b, int beta_b, 
   std::vector<double> log_bb_j_logbeta_j_bb;
   log_bb_j_logbeta_j_bb.reserve(alpha_b);
 
-  for (auto j = 0; j < alpha_b; j++) {
+  for (int j = 0; j < alpha_b; j++) {
     log_bb_j_logbeta_j_bb.push_back(std::log(beta_b + j) + logbeta(1 + j, beta_b));
   }
 
@@ -45,14 +45,14 @@ inline double prob_c_beats_ab(int alpha_a, int beta_a, int alpha_b, int beta_b, 
   std::vector<double> logbeta_ac_i_j;
   logbeta_ac_i_j.reserve(alpha_a + alpha_b);
 
-  for (auto i = 0; i < alpha_a + alpha_b; i++) {
+  for (int i = 0; i < alpha_a + alpha_b; i++) {
     logbeta_ac_i_j.push_back(logbeta(alpha_c + i, abc));
   }
 
-  for (auto i = 0; i < alpha_a; i++) {
+  for (int i = 0; i < alpha_a; i++) {
     double sum_i = -std::log(beta_a + i) - logbeta(1 + i, beta_a) - logbeta_ac_bc;
 
-    for (auto j = 0; j < alpha_b; j++) {
+    for (int j = 0; j < alpha_b; j++) {
       total += std::exp(sum_i + logbeta_ac_i_j[i + j] - log_bb_j_logbeta_j_bb[j]);
     }
   }
@@ -71,14 +71,14 @@ inline double prob_d_beats_abc(int alpha_a, int beta_a, int alpha_b, int beta_b,
   std::vector<double> log_bb_j_logbeta_j_bb;
   log_bb_j_logbeta_j_bb.reserve(alpha_b);
 
-  for (auto j = 0; j < alpha_b; j++) {
+  for (int j = 0; j < alpha_b; j++) {
     log_bb_j_logbeta_j_bb.push_back(std::log(beta_b + j) + logbeta(1 + j, beta_b));
   }
 
   std::vector<double> log_bc_k_logbeta_k_bc;
   log_bc_k_logbeta_k_bc.reserve(alpha_c);
 
-  for (auto k = 0; k < alpha_c; k++) {
+  for (int k = 0; k < alpha_c; k++) {
     log_bc_k_logbeta_k_bc.push_back(std::log(beta_c + k) + logbeta(1 + k, beta_c));
   }
 
@@ -86,17 +86,17 @@ inline double prob_d_beats_abc(int alpha_a, int beta_a, int alpha_b, int beta_b,
   std::vector<double> logbeta_bd_i_j_k;
   logbeta_bd_i_j_k.reserve(alpha_a + alpha_b + alpha_c);
 
-  for (auto i = 0; i < alpha_a + alpha_b + alpha_c; i++) {
+  for (int i = 0; i < alpha_a + alpha_b + alpha_c; i++) {
     logbeta_bd_i_j_k.push_back(logbeta(alpha_d + i, abcd));
   }
 
-  for (auto i = 0; i < alpha_a; i++) {
+  for (int i = 0; i < alpha_a; i++) {
     double sum_i = -std::log(beta_a + i) - logbeta(1 + i, beta_a) - logbeta_ad_bd;
 
-    for (auto j = 0; j < alpha_b; j++) {
+    for (int j = 0; j < alpha_b; j++) {
       double sum_j = sum_i - log_bb_j_logbeta_j_bb[j];
 
-      for (auto k = 0; k < alpha_c; k++) {
+      for (int k = 0; k < alpha_c; k++) {
         total += std::exp(sum_j + logbeta_bd_i_j_k[i + j + k] - log_bc_k_logbeta_k_bc[k]);
       }
     }
@@ -118,7 +118,7 @@ inline double prob_1_beats_2(int alpha_1, int beta_1, int alpha_2, int beta_2) {
   double a2_log_b2 = alpha_2 * std::log(beta_2);
   double log_b1_b2 = std::log(beta_1 + beta_2);
 
-  for (auto k = 0; k < alpha_1; k++) {
+  for (int k = 0; k < alpha_1; k++) {
     total += std::exp(k * log_b1 +
       a2_log_b2 -
       (k + alpha_2) * log_b1_b2 -
@@ -138,10 +138,10 @@ inline double prob_1_beats_23(int alpha_1, int beta_1, int alpha_2, int beta_2, 
   double log_b3 = std::log(beta_3);
   double loggamma_a1 = std::lgamma(alpha_1);
 
-  for (auto k = 0; k < alpha_2; k++) {
+  for (int k = 0; k < alpha_2; k++) {
     double sum_k = a1_log_b1 + k * log_b2 - std::lgamma(k + 1);
 
-    for (auto l = 0; l < alpha_3; l++) {
+    for (int l = 0; l < alpha_3; l++) {
       total += std::exp(sum_k + l * log_b3
         - (k + l + alpha_1) * log_b1_b2_b3
         + std::lgamma(k + l + alpha_1) - std::lgamma(l + 1) - loggamma_a1);
@@ -179,10 +179,10 @@ class BinaryTest {
         break;
       }
       case 2: {
-        auto b = variants[0];
-        auto a = variants[1];
+        const Variant& b = variants[0];
+        const Variant& a = variants[1];
 
-        auto prob = detail::prob_b_beats_a(
+        double prob = detail::prob_b_beats_a(
           1 + a.conversions,
           1 + a.participants - a.conversions,
           1 + b.conversions,
@@ -194,13 +194,13 @@ class BinaryTest {
         break;
       }
       case 3: {
-        auto total = 0.0;
-        for (auto i = 0; i < 2; i++) {
-            auto c = variants[i];
-            auto b = variants[(i + 1) % 3];
-            auto a = variants[(i + 2) % 3];
+        double total = 0.0;
+        for (size_t i = 0; i < 2; i++) {
+            const Variant& c = variants[i];
+            const Variant& b = variants[(i + 1) % 3];
+            const Variant& a = variants[(i + 2) % 3];
 
-            auto prob = detail::prob_c_beats_ab(
+            double prob = detail::prob_c_beats_ab(
               1 + a.conversions,
               1 + a.participants - a.conversions,
               1 + b.conversions,
@@ -217,14 +217,14 @@ class BinaryTest {
         break;
       }
       default: {
-        auto total = 0.0;
-        for (auto i = 0; i < 3; i++) {
-            auto d = variants[i];
-            auto c = variants[(i + 1) % 4];
-            auto b = variants[(i + 2) % 4];
-            auto a = variants[(i + 3) % 4];
+        double total = 0.0;
+        for (size_t i = 0; i < 3; i++) {
+            const Variant& d = variants[i];
+            const Variant& c = variants[(i + 1) % 4];
+            const Variant& b = variants[(i + 2) % 4];
+            const Variant& a = variants[(i + 3) % 4];
 
-            auto prob = detail::prob_d_beats_abc(
+            double prob = detail::prob_d_beats_abc(
               1 + a.conversions,
               1 + a.participants - a.conversions,
               1 + b.conversions,
@@ -277,10 +277,10 @@ class CountTest {
         break;
       }
       case 2: {
-        auto a = variants[0];
-        auto b = variants[1];
+        const Variant& a = variants[0];
+        const Variant& b = variants[1];
 
-        auto prob = detail::prob_1_beats_2(
+        double prob = detail::prob_1_beats_2(
           a.events,
           a.exposure,
           b.events,
@@ -292,13 +292,13 @@ class CountTest {
         break;
       }
       default: {
-        auto total = 0.0;
-        for (auto i = 0; i < 2; i++) {
-            auto a = variants[i];
-            auto b = variants[(i + 1) % 3];
-            auto c = variants[(i + 2) % 3];
+        double total = 0.0;
+        for (size_t i = 0; i < 2; i++) {
+            const Variant& a = variants[i];
+            const Variant& b = variants[(i + 1) % 3];
+            const Variant& c = variants[(i + 2) % 3];
 
-            auto prob = detail::prob_1_beats_23(
+            double prob = detail::prob_1_beats_23(
               a.events,
               a.exposure,
               b.events,
