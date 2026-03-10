@@ -12,10 +12,8 @@ jobs:
 
       - run: cmake -S . -B build
       - run: cmake --build build
-
       - if: ${{ runner.os == 'Windows' }}
         run: cp build/Debug/test.exe build
-
       - run: build/test
 
       - if: ${{ runner.os == 'Linux' }}
