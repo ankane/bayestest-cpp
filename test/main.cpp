@@ -1,4 +1,5 @@
 #include <cassert>
+#include <cmath>
 #include <vector>
 
 #include "../include/bayestest.hpp"
@@ -12,7 +13,7 @@ using bayestest::detail::prob_1_beats_2;
 using bayestest::detail::prob_1_beats_23;
 
 void assert_approx(double act, double exp) {
-  assert(abs(act - exp) < 0.0000000001);
+  assert(std::abs(act - exp) < 0.0000000001);
 }
 
 void test_binary_no_variants() {
