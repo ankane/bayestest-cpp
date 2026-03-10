@@ -10,8 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - run: g++ -std=c++11 -Wall -Wextra -Werror -o test/main test/main.cpp
-      - run: test/main
+      - run: cmake -S . -B build
+      - run: cmake --build build
+      - run: build/test
 
       - if: ${{ runner.os == 'Linux' }}
         run: |
