@@ -34,8 +34,8 @@ void test_binary_two_variants() {
   test.add(400, 250);
   std::vector<double> probabilities = test.probabilities();
   assert(probabilities.size() == 2);
-  assert_approx(probabilities[0], 0.001756431311879969);
-  assert_approx(probabilities[1], 0.99824356868812);
+  assert_approx(probabilities.at(0), 0.001756431311879969);
+  assert_approx(probabilities.at(1), 0.99824356868812);
 }
 
 void test_binary_three_variants() {
@@ -45,9 +45,9 @@ void test_binary_three_variants() {
   test.add(72, 19);
   std::vector<double> probabilities = test.probabilities();
   assert(probabilities.size() == 3);
-  assert_approx(probabilities[0], 0.29632930651329037);
-  assert_approx(probabilities[1], 0.277257277195332);
-  assert_approx(probabilities[2], 0.42641341629137763);
+  assert_approx(probabilities.at(0), 0.29632930651329037);
+  assert_approx(probabilities.at(1), 0.277257277195332);
+  assert_approx(probabilities.at(2), 0.42641341629137763);
 }
 
 void test_binary_four_variants() {
@@ -58,10 +58,10 @@ void test_binary_four_variants() {
   test.add(50, 45);
   std::vector<double> probabilities = test.probabilities();
   assert(probabilities.size() == 4);
-  assert_approx(probabilities[0], 0.02692341639320739);
-  assert_approx(probabilities[1], 0.7040521621641954);
-  assert_approx(probabilities[2], 0.249824960767943);
-  assert_approx(probabilities[3], 0.019199460674668434);
+  assert_approx(probabilities.at(0), 0.02692341639320739);
+  assert_approx(probabilities.at(1), 0.7040521621641954);
+  assert_approx(probabilities.at(2), 0.249824960767943);
+  assert_approx(probabilities.at(3), 0.019199460674668434);
 }
 
 void test_count_no_variants() {
@@ -82,8 +82,8 @@ void test_count_two_variants() {
   test.add(30, 30);
   std::vector<double> probabilities = test.probabilities();
   assert(probabilities.size() == 2);
-  assert_approx(probabilities[0], 0.6710529663661625);
-  assert_approx(probabilities[1], 0.3289470336338596);
+  assert_approx(probabilities.at(0), 0.6710529663661625);
+  assert_approx(probabilities.at(1), 0.3289470336338596);
 }
 
 void test_count_three_variants() {
@@ -93,9 +93,9 @@ void test_count_three_variants() {
   test.add(10, 10);
   std::vector<double> probabilities = test.probabilities();
   assert(probabilities.size() == 3);
-  assert_approx(probabilities[0], 0.4633365654508068);
-  assert_approx(probabilities[1], 0.2306153779716283);
-  assert_approx(probabilities[2], 0.3060480565775272);
+  assert_approx(probabilities.at(0), 0.4633365654508068);
+  assert_approx(probabilities.at(1), 0.2306153779716283);
+  assert_approx(probabilities.at(2), 0.3060480565775272);
 }
 
 void test_prob_b_beats_a() {
