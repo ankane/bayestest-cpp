@@ -2,7 +2,7 @@
 #include <cmath>
 #include <vector>
 
-#include "../include/bayestest.hpp"
+#include <bayestest.hpp>
 
 using bayestest::BinaryTest;
 using bayestest::CountTest;
