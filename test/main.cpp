@@ -1,9 +1,7 @@
 #include <cassert>
 #include <cmath>
 #include <functional>
-#include <optional>
 #include <stdexcept>
-#include <string_view>
 #include <vector>
 
 #include <bayestest.hpp>
@@ -21,17 +19,14 @@ void assert_approx(double act, double exp) {
 }
 
 template<typename T>
-void assert_exception(const std::function<void(void)>& code, std::optional<std::string_view> message = std::nullopt) {
-  std::optional<T> exception;
+void assert_exception(const std::function<void(void)>& code, const std::string& expected) {
+  std::string message = "";
   try {
     code();
   } catch (const T& e) {
-    exception = e;
+    message = std::string{e.what()};
   }
-  assert(exception.has_value());
-  if (message) {
-    assert(std::string_view{exception.value().what()} == message.value());
-  }
+  assert(message == expected);
 }
 
 void test_binary_no_variants() {
