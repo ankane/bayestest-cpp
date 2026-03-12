@@ -8,6 +8,7 @@
 
 #include <cmath>
 #include <cstddef>
+#include <stdexcept>
 #include <vector>
 
 namespace bayestest {
@@ -162,6 +163,12 @@ class BinaryTest {
  public:
   /// Adds a new variant.
   void add(int participants, int conversions) {
+    if (participants < 0) {
+      throw std::invalid_argument{"participants cannot be negative"};
+    }
+    if (conversions < 0) {
+      throw std::invalid_argument{"conversions cannot be negative"};
+    }
     variants.emplace_back(participants, conversions);
   }
 
@@ -260,6 +267,12 @@ class CountTest {
  public:
   /// Adds a new variant.
   void add(int events, int exposure) {
+    if (events < 0) {
+      throw std::invalid_argument{"events cannot be negative"};
+    }
+    if (exposure < 0) {
+      throw std::invalid_argument{"exposure cannot be negative"};
+    }
     variants.emplace_back(events, exposure);
   }
 

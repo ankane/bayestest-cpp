@@ -1,5 +1,9 @@
 #include <cassert>
 #include <cmath>
+#include <functional>
+#include <optional>
+#include <stdexcept>
+#include <string_view>
 #include <vector>
 
 #include <bayestest.hpp>
@@ -14,6 +18,20 @@ using bayestest::detail::prob_1_beats_23;
 
 void assert_approx(double act, double exp) {
   assert(std::abs(act - exp) < 0.0000000001);
+}
+
+template<typename T>
+void assert_exception(const std::function<void(void)>& code, std::optional<std::string_view> message = std::nullopt) {
+  std::optional<T> exception;
+  try {
+    code();
+  } catch (const T& e) {
+    exception = e;
+  }
+  assert(exception.has_value());
+  if (message) {
+    assert(std::string_view{exception.value().what()} == message.value());
+  }
 }
 
 void test_binary_no_variants() {
@@ -64,6 +82,20 @@ void test_binary_four_variants() {
   assert_approx(probabilities.at(3), 0.019199460674668434);
 }
 
+void test_binary_negative_participants() {
+  BinaryTest test;
+  assert_exception<std::invalid_argument>([&]() {
+    test.add(-1, 1);
+  }, "participants cannot be negative");
+}
+
+void test_binary_negative_conversions() {
+  BinaryTest test;
+  assert_exception<std::invalid_argument>([&]() {
+    test.add(1, -1);
+  }, "conversions cannot be negative");
+}
+
 void test_count_no_variants() {
   CountTest test;
   assert(test.probabilities().empty());
@@ -96,6 +128,20 @@ void test_count_three_variants() {
   assert_approx(probabilities.at(0), 0.4633365654508068);
   assert_approx(probabilities.at(1), 0.2306153779716283);
   assert_approx(probabilities.at(2), 0.3060480565775272);
+}
+
+void test_count_negative_events() {
+  CountTest test;
+  assert_exception<std::invalid_argument>([&]() {
+    test.add(-1, 1);
+  }, "events cannot be negative");
+}
+
+void test_count_negative_exposure() {
+  CountTest test;
+  assert_exception<std::invalid_argument>([&]() {
+    test.add(1, -1);
+  }, "exposure cannot be negative");
 }
 
 void test_prob_b_beats_a() {
@@ -135,11 +181,15 @@ int main() {
   test_binary_two_variants();
   test_binary_three_variants();
   test_binary_four_variants();
+  test_binary_negative_participants();
+  test_binary_negative_conversions();
 
   test_count_no_variants();
   test_count_one_variant();
   test_count_two_variants();
   test_count_three_variants();
+  test_count_negative_events();
+  test_count_negative_exposure();
 
   test_prob_b_beats_a();
   test_prob_c_beats_ab();
