@@ -91,6 +91,13 @@ void test_binary_negative_conversions() {
   }, "conversions cannot be negative");
 }
 
+void test_binary_high_conversions() {
+  BinaryTest test;
+  assert_exception<std::invalid_argument>([&]() {
+    test.add(1, 2);
+  }, "conversions cannot be greater than participants");
+}
+
 void test_count_no_variants() {
   CountTest test;
   assert(test.probabilities().empty());
@@ -139,6 +146,13 @@ void test_count_negative_exposure() {
   }, "exposure cannot be negative");
 }
 
+void test_count_high_exposure() {
+  CountTest test;
+  assert_exception<std::invalid_argument>([&]() {
+    test.add(1, 2);
+  }, "exposure cannot be greater than events");
+}
+
 void test_prob_b_beats_a() {
   assert_approx(prob_b_beats_a(1, 2, 3, 4), 0.6428571428571429);
   assert_approx(prob_b_beats_a(55, 50, 30, 30), 0.38386463776317903);
@@ -178,6 +192,7 @@ int main() {
   test_binary_four_variants();
   test_binary_negative_participants();
   test_binary_negative_conversions();
+  test_binary_high_conversions();
 
   test_count_no_variants();
   test_count_one_variant();
@@ -185,6 +200,7 @@ int main() {
   test_count_three_variants();
   test_count_negative_events();
   test_count_negative_exposure();
+  test_count_high_exposure();
 
   test_prob_b_beats_a();
   test_prob_c_beats_ab();
