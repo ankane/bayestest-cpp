@@ -267,7 +267,7 @@ class BinaryTest {
 
 /// A test for count data.
 class CountTest {
- public:
+  public:
     /// Adds a new variant.
     void add(int events, int exposure) {
         if (events < 0) {
