@@ -182,11 +182,25 @@ void test_count_negative_events() {
     }, "events cannot be negative");
 }
 
+void test_count_high_events() {
+    CountTest test;
+    assert_exception<std::invalid_argument>([&]() {
+        test.add(std::numeric_limits<int>::max(), 1);
+    }, "too many events");
+}
+
 void test_count_negative_exposure() {
     CountTest test;
     assert_exception<std::invalid_argument>([&]() {
         test.add(1, -1);
     }, "exposure cannot be negative");
+}
+
+void test_count_high_exposure() {
+    CountTest test;
+    assert_exception<std::invalid_argument>([&]() {
+        test.add(1, std::numeric_limits<int>::max());
+    }, "too high exposure");
 }
 
 void test_prob_b_beats_a() {
@@ -240,7 +254,9 @@ int main() {
     test_count_four_variants();
     test_count_exposure_relative();
     test_count_negative_events();
+    test_count_high_events();
     test_count_negative_exposure();
+    test_count_high_exposure();
 
     test_prob_b_beats_a();
     test_prob_c_beats_ab();
