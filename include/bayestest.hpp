@@ -167,21 +167,27 @@ class BinaryTest {
         if (variants.size() == 4) {
             throw std::runtime_error{"too many variants"};
         }
+
         if (participants < 0) {
             throw std::invalid_argument{"participants cannot be negative"};
         }
+
         if (participants > std::numeric_limits<int>::max() / static_cast<int>(sizeof(double)) / 4) {
             throw std::invalid_argument{"too many participants"};
         }
+
         if (conversions < 0) {
             throw std::invalid_argument{"conversions cannot be negative"};
         }
+
         if (conversions > std::numeric_limits<int>::max() / static_cast<int>(sizeof(double)) / 4) {
             throw std::invalid_argument{"too many conversions"};
         }
+
         if (conversions > participants) {
             throw std::invalid_argument{"conversions cannot be greater than participants"};
         }
+
         variants.emplace_back(participants, conversions);
     }
 
@@ -289,18 +295,23 @@ class CountTest {
         if (variants.size() == 3) {
             throw std::runtime_error{"too many variants"};
         }
+
         if (events < 0) {
             throw std::invalid_argument{"events cannot be negative"};
         }
+
         if (events > std::numeric_limits<int>::max() / 4) {
             throw std::invalid_argument{"too many events"};
         }
+
         if (exposure < 0) {
             throw std::invalid_argument{"exposure cannot be negative"};
         }
+
         if (exposure > std::numeric_limits<int>::max() / 4) {
             throw std::invalid_argument{"too high exposure"};
         }
+
         variants.emplace_back(events, exposure);
     }
 
