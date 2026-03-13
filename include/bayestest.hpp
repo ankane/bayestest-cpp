@@ -276,9 +276,6 @@ class CountTest {
     if (exposure < 0) {
       throw std::invalid_argument{"exposure cannot be negative"};
     }
-    if (exposure > events) {
-      throw std::invalid_argument{"exposure cannot be greater than events"};
-    }
     variants.emplace_back(events, exposure);
   }
 
