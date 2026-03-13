@@ -191,6 +191,9 @@ class BinaryTest {
         probs.reserve(variants.size());
 
         switch (variants.size()) {
+            case 0: {
+                break;
+            }
             case 1: {
                 probs.push_back(1);
 
@@ -261,7 +264,8 @@ class BinaryTest {
                 break;
             }
             default: {
-                break;
+                // std::unreachable requires C++23
+                throw std::runtime_error("unreachable");
             }
         }
         return probs;
@@ -300,6 +304,9 @@ class CountTest {
         probs.reserve(variants.size());
 
         switch (variants.size()) {
+            case 0: {
+                break;
+            }
             case 1: {
                 probs.push_back(1);
 
@@ -344,7 +351,8 @@ class CountTest {
                 break;
             }
             default: {
-                break;
+                // std::unreachable requires C++23
+                throw std::runtime_error("unreachable");
             }
         }
         return probs;
