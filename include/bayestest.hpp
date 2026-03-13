@@ -8,6 +8,7 @@
 
 #include <cmath>
 #include <cstddef>
+#include <limits>
 #include <stdexcept>
 #include <vector>
 
@@ -166,8 +167,14 @@ class BinaryTest {
         if (participants < 0) {
             throw std::invalid_argument{"participants cannot be negative"};
         }
+        if (participants > std::numeric_limits<int>::max() / static_cast<int>(sizeof(double)) / 4) {
+            throw std::invalid_argument{"too many participants"};
+        }
         if (conversions < 0) {
             throw std::invalid_argument{"conversions cannot be negative"};
+        }
+        if (conversions > std::numeric_limits<int>::max() / static_cast<int>(sizeof(double)) / 4) {
+            throw std::invalid_argument{"too many conversions"};
         }
         if (conversions > participants) {
             throw std::invalid_argument{"conversions cannot be greater than participants"};

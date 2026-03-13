@@ -1,6 +1,7 @@
 #include <cassert>
 #include <cmath>
 #include <functional>
+#include <limits>
 #include <stdexcept>
 #include <vector>
 
@@ -84,6 +85,13 @@ void test_binary_negative_participants() {
     }, "participants cannot be negative");
 }
 
+void test_binary_high_participants() {
+    BinaryTest test;
+    assert_exception<std::invalid_argument>([&]() {
+        test.add(std::numeric_limits<int>::max(), 1);
+    }, "too many participants");
+}
+
 void test_binary_negative_conversions() {
     BinaryTest test;
     assert_exception<std::invalid_argument>([&]() {
@@ -92,6 +100,13 @@ void test_binary_negative_conversions() {
 }
 
 void test_binary_high_conversions() {
+    BinaryTest test;
+    assert_exception<std::invalid_argument>([&]() {
+        test.add(1, std::numeric_limits<int>::max());
+    }, "too many conversions");
+}
+
+void test_binary_more_conversions() {
     BinaryTest test;
     assert_exception<std::invalid_argument>([&]() {
         test.add(1, 2);
@@ -194,8 +209,10 @@ int main() {
     test_binary_three_variants();
     test_binary_four_variants();
     test_binary_negative_participants();
+    test_binary_high_participants();
     test_binary_negative_conversions();
     test_binary_high_conversions();
+    test_binary_more_conversions();
 
     test_count_no_variants();
     test_count_one_variant();
