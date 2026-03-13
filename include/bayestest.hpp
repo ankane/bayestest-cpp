@@ -202,7 +202,6 @@ class BinaryTest {
             }
             case 1: {
                 probs.push_back(1);
-
                 break;
             }
             case 2: {
@@ -215,9 +214,9 @@ class BinaryTest {
                     1 + b.conversions,
                     1 + b.participants - b.conversions
                 );
+
                 probs.push_back(prob);
                 probs.push_back(1 - prob);
-
                 break;
             }
             case 3: {
@@ -240,7 +239,6 @@ class BinaryTest {
                     total += prob;
                 }
                 probs.push_back(1 - total);
-
                 break;
             }
             case 4: {
@@ -266,7 +264,6 @@ class BinaryTest {
                     total += prob;
                 }
                 probs.push_back(1 - total);
-
                 break;
             }
             default: {
@@ -326,7 +323,6 @@ class CountTest {
             }
             case 1: {
                 probs.push_back(1);
-
                 break;
             }
             case 2: {
@@ -339,9 +335,9 @@ class CountTest {
                     b.events,
                     b.exposure
                 );
+
                 probs.push_back(prob);
                 probs.push_back(1 - prob);
-
                 break;
             }
             case 3: {
@@ -364,7 +360,6 @@ class CountTest {
                     total += prob;
                 }
                 probs.push_back(1 - total);
-
                 break;
             }
             default: {
