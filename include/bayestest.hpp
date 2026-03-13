@@ -191,9 +191,6 @@ class BinaryTest {
         probs.reserve(variants.size());
 
         switch (variants.size()) {
-            case 0: {
-              break;
-            }
             case 1: {
                 probs.push_back(1);
 
@@ -237,7 +234,7 @@ class BinaryTest {
 
                 break;
             }
-            default: {
+            case 4: {
                 double total = 0.0;
                 for (size_t i = 0; i < 3; i++) {
                     const Variant& d = variants.at(i);
@@ -260,6 +257,11 @@ class BinaryTest {
                     total += prob;
                 }
                 probs.push_back(1 - total);
+
+                break;
+            }
+            default: {
+                break;
             }
         }
         return probs;
@@ -298,9 +300,6 @@ class CountTest {
         probs.reserve(variants.size());
 
         switch (variants.size()) {
-            case 0: {
-                break;
-            }
             case 1: {
                 probs.push_back(1);
 
@@ -321,7 +320,7 @@ class CountTest {
 
                 break;
             }
-            default: {
+            case 3: {
                 double total = 0.0;
                 for (size_t i = 0; i < 2; i++) {
                     const Variant& a = variants.at(i);
@@ -341,6 +340,11 @@ class CountTest {
                     total += prob;
                 }
                 probs.push_back(1 - total);
+
+                break;
+            }
+            default: {
+                break;
             }
         }
         return probs;
