@@ -132,6 +132,16 @@ void test_count_three_variants() {
   assert_approx(probabilities.at(2), 0.3060480565775272);
 }
 
+void test_count_exposure_relative() {
+  CountTest test;
+  test.add(55, 50000);
+  test.add(30, 30000);
+  std::vector<double> probabilities = test.probabilities();
+  assert(probabilities.size() == 2);
+  assert_approx(probabilities.at(0), 0.6710529663661625);
+  assert_approx(probabilities.at(1), 0.3289470336338596);
+}
+
 void test_count_negative_events() {
   CountTest test;
   assert_exception<std::invalid_argument>([&]() {
@@ -191,6 +201,7 @@ int main() {
   test_count_one_variant();
   test_count_two_variants();
   test_count_three_variants();
+  test_count_exposure_relative();
   test_count_negative_events();
   test_count_negative_exposure();
 
