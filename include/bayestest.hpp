@@ -164,6 +164,9 @@ class BinaryTest {
   public:
     /// Adds a new variant.
     void add(int participants, int conversions) {
+        if (variants.size() == 4) {
+            throw std::runtime_error{"too many variants"};
+        }
         if (participants < 0) {
             throw std::invalid_argument{"participants cannot be negative"};
         }
@@ -277,6 +280,9 @@ class CountTest {
   public:
     /// Adds a new variant.
     void add(int events, int exposure) {
+        if (variants.size() == 3) {
+            throw std::runtime_error{"too many variants"};
+        }
         if (events < 0) {
             throw std::invalid_argument{"events cannot be negative"};
         }

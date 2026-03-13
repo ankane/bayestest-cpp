@@ -78,6 +78,15 @@ void test_binary_four_variants() {
     assert_approx(probabilities.at(3), 0.019199460674668434);
 }
 
+void test_binary_five_variants() {
+    BinaryTest test;
+    assert_exception<std::runtime_error>([&]() {
+        for (int i = 0; i < 5; i++) {
+            test.add(2, 1);
+        }
+    }, "too many variants");
+}
+
 void test_binary_negative_participants() {
     BinaryTest test;
     assert_exception<std::invalid_argument>([&]() {
@@ -147,6 +156,15 @@ void test_count_three_variants() {
     assert_approx(probabilities.at(2), 0.3060480565775272);
 }
 
+void test_count_four_variants() {
+    CountTest test;
+    assert_exception<std::runtime_error>([&]() {
+        for (int i = 0; i < 5; i++) {
+            test.add(2, 1);
+        }
+    }, "too many variants");
+}
+
 void test_count_exposure_relative() {
     CountTest test;
     test.add(55, 50000);
@@ -208,6 +226,7 @@ int main() {
     test_binary_two_variants();
     test_binary_three_variants();
     test_binary_four_variants();
+    test_binary_five_variants();
     test_binary_negative_participants();
     test_binary_high_participants();
     test_binary_negative_conversions();
@@ -218,6 +237,7 @@ int main() {
     test_count_one_variant();
     test_count_two_variants();
     test_count_three_variants();
+    test_count_four_variants();
     test_count_exposure_relative();
     test_count_negative_events();
     test_count_negative_exposure();
