@@ -335,12 +335,12 @@ class CountTest {
                     const Variant& c = variants.at((i + 2) % 3);
 
                     double prob = detail::prob_1_beats_23(
-                      a.events,
-                      a.exposure,
-                      b.events,
-                      b.exposure,
-                      c.events,
-                      c.exposure
+                        a.events,
+                        a.exposure,
+                        b.events,
+                        b.exposure,
+                        c.events,
+                        c.exposure
                     );
 
                     probs.push_back(prob);
