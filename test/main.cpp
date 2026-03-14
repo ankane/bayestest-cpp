@@ -22,7 +22,7 @@ void assert_approx(double act, double exp) {
 
 template<typename T>
 void assert_exception(const std::function<void(void)>& code, const std::string& expected) {
-    std::string message = "";
+    std::string message;
     try {
         code();
     } catch (const T& e) {
