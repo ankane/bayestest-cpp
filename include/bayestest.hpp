@@ -299,7 +299,10 @@ class BinaryTest {
 
   private:
     struct Variant {
-        Variant(int participants, int conversions) : participants(participants), conversions(conversions) {}
+        Variant(int participants, int conversions) :
+            participants(participants),
+            conversions(conversions) {}
+
         int participants;
         int conversions;
     };
@@ -352,12 +355,7 @@ class CountTest {
                 const Variant& a = variants.at(0);
                 const Variant& b = variants.at(1);
 
-                double prob = detail::prob_1_beats_2(
-                    a.events,
-                    a.exposure,
-                    b.events,
-                    b.exposure
-                );
+                double prob = detail::prob_1_beats_2(a.events, a.exposure, b.events, b.exposure);
 
                 probs.push_back(prob);
                 probs.push_back(1 - prob);
@@ -396,6 +394,7 @@ class CountTest {
   private:
     struct Variant {
         Variant(int events, int exposure) : events(events), exposure(exposure) {}
+
         int events;
         int exposure;
     };
