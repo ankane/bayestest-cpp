@@ -29,7 +29,7 @@ inline double prob_b_beats_a(int alpha_a, int beta_a, int alpha_b, int beta_b) {
         total += std::exp(logbeta(alpha_a + i, beta_ba) - std::log(beta_b + i) - logbeta(1 + i, beta_b) - logbeta_aa_ba);
     }
 
-  return total;
+    return total;
 }
 
 inline double prob_c_beats_ab(int alpha_a, int beta_a, int alpha_b, int beta_b, int alpha_c, int beta_c) {
@@ -272,7 +272,7 @@ class BinaryTest {
             }
         }
         return probs;
-  }
+    }
 
   private:
     struct Variant {
