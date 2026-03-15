@@ -32,7 +32,14 @@ inline double prob_b_beats_a(int alpha_a, int beta_a, int alpha_b, int beta_b) {
     return total;
 }
 
-inline double prob_c_beats_ab(int alpha_a, int beta_a, int alpha_b, int beta_b, int alpha_c, int beta_c) {
+inline double prob_c_beats_ab(
+    int alpha_a,
+    int beta_a,
+    int alpha_b,
+    int beta_b,
+    int alpha_c,
+    int beta_c
+) {
     double total = 0.0;
 
     double logbeta_ac_bc = logbeta(alpha_c, beta_c);
@@ -66,7 +73,16 @@ inline double prob_c_beats_ab(int alpha_a, int beta_a, int alpha_b, int beta_b, 
         + total;
 }
 
-inline double prob_d_beats_abc(int alpha_a, int beta_a, int alpha_b, int beta_b, int alpha_c, int beta_c, int alpha_d, int beta_d) {
+inline double prob_d_beats_abc(
+    int alpha_a,
+    int beta_a,
+    int alpha_b,
+    int beta_b,
+    int alpha_c,
+    int beta_c,
+    int alpha_d,
+    int beta_d
+) {
     double total = 0.0;
 
     double logbeta_ad_bd = logbeta(alpha_d, beta_d);
@@ -132,7 +148,14 @@ inline double prob_1_beats_2(int alpha_1, int beta_1, int alpha_2, int beta_2) {
     return total;
 }
 
-inline double prob_1_beats_23(int alpha_1, int beta_1, int alpha_2, int beta_2, int alpha_3, int beta_3) {
+inline double prob_1_beats_23(
+    int alpha_1,
+    int beta_1,
+    int alpha_2,
+    int beta_2,
+    int alpha_3,
+    int beta_3
+) {
     double total = 0.0;
 
     double log_b1_b2_b3 = std::log(beta_1 + beta_2 + beta_3);
