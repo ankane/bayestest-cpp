@@ -26,7 +26,10 @@ inline double prob_b_beats_a(int alpha_a, int beta_a, int alpha_b, int beta_b) {
     double beta_ba = beta_b + beta_a;
 
     for (int i = 0; i < alpha_b; i++) {
-        total += std::exp(logbeta(alpha_a + i, beta_ba) - std::log(beta_b + i) - logbeta(1 + i, beta_b) - logbeta_aa_ba);
+        total += std::exp(
+            logbeta(alpha_a + i, beta_ba) - std::log(beta_b + i) - logbeta(1 + i, beta_b)
+            - logbeta_aa_ba
+        );
     }
 
     return total;
@@ -63,14 +66,15 @@ inline double prob_c_beats_ab(
         double sum_i = -std::log(beta_a + i) - logbeta(1 + i, beta_a) - logbeta_ac_bc;
 
         for (int j = 0; j < alpha_b; j++) {
-            total += std::exp(sum_i + logbeta_ac_i_j.at(static_cast<size_t>(i + j)) - log_bb_j_logbeta_j_bb.at(static_cast<size_t>(j)));
+            total += std::exp(
+                sum_i + logbeta_ac_i_j.at(static_cast<size_t>(i + j))
+                - log_bb_j_logbeta_j_bb.at(static_cast<size_t>(j))
+            );
         }
     }
 
-    return 1
-        - prob_b_beats_a(alpha_c, beta_c, alpha_a, beta_a)
-        - prob_b_beats_a(alpha_c, beta_c, alpha_b, beta_b)
-        + total;
+    return 1 - prob_b_beats_a(alpha_c, beta_c, alpha_a, beta_a)
+        - prob_b_beats_a(alpha_c, beta_c, alpha_b, beta_b) + total;
 }
 
 inline double prob_d_beats_abc(
@@ -116,19 +120,20 @@ inline double prob_d_beats_abc(
             double sum_j = sum_i - log_bb_j_logbeta_j_bb.at(static_cast<size_t>(j));
 
             for (int k = 0; k < alpha_c; k++) {
-                total += std::exp(sum_j + logbeta_bd_i_j_k.at(static_cast<size_t>(i + j + k)) - log_bc_k_logbeta_k_bc.at(static_cast<size_t>(k)));
+                total += std::exp(
+                    sum_j + logbeta_bd_i_j_k.at(static_cast<size_t>(i + j + k))
+                    - log_bc_k_logbeta_k_bc.at(static_cast<size_t>(k))
+                );
             }
         }
     }
 
-    return 1
-        - prob_b_beats_a(alpha_a, beta_a, alpha_d, beta_d)
+    return 1 - prob_b_beats_a(alpha_a, beta_a, alpha_d, beta_d)
         - prob_b_beats_a(alpha_b, beta_b, alpha_d, beta_d)
         - prob_b_beats_a(alpha_c, beta_c, alpha_d, beta_d)
         + prob_c_beats_ab(alpha_a, beta_a, alpha_b, beta_b, alpha_d, beta_d)
         + prob_c_beats_ab(alpha_a, beta_a, alpha_c, beta_c, alpha_d, beta_d)
-        + prob_c_beats_ab(alpha_b, beta_b, alpha_c, beta_c, alpha_d, beta_d)
-        - total;
+        + prob_c_beats_ab(alpha_b, beta_b, alpha_c, beta_c, alpha_d, beta_d) - total;
 }
 
 inline double prob_1_beats_2(int alpha_1, int beta_1, int alpha_2, int beta_2) {
@@ -138,11 +143,10 @@ inline double prob_1_beats_2(int alpha_1, int beta_1, int alpha_2, int beta_2) {
     double log_b1_b2 = std::log(beta_1 + beta_2);
 
     for (int k = 0; k < alpha_1; k++) {
-        total += std::exp(k * log_b1 +
-            a2_log_b2 -
-            (k + alpha_2) * log_b1_b2 -
-            std::log(k + alpha_2) -
-            logbeta(k + 1, alpha_2));
+        total += std::exp(
+            k * log_b1 + a2_log_b2 - (k + alpha_2) * log_b1_b2 - std::log(k + alpha_2)
+            - logbeta(k + 1, alpha_2)
+        );
     }
 
     return total;
@@ -168,16 +172,15 @@ inline double prob_1_beats_23(
         double sum_k = a1_log_b1 + k * log_b2 - std::lgamma(k + 1);
 
         for (int l = 0; l < alpha_3; l++) {
-            total += std::exp(sum_k + l * log_b3
-                - (k + l + alpha_1) * log_b1_b2_b3
-                + std::lgamma(k + l + alpha_1) - std::lgamma(l + 1) - loggamma_a1);
+            total += std::exp(
+                sum_k + l * log_b3 - (k + l + alpha_1) * log_b1_b2_b3 + std::lgamma(k + l + alpha_1)
+                - std::lgamma(l + 1) - loggamma_a1
+            );
         }
     }
 
-    return 1
-        - prob_1_beats_2(alpha_2, beta_2, alpha_1, beta_1)
-        - prob_1_beats_2(alpha_3, beta_3, alpha_1, beta_1)
-        + total;
+    return 1 - prob_1_beats_2(alpha_2, beta_2, alpha_1, beta_1)
+        - prob_1_beats_2(alpha_3, beta_3, alpha_1, beta_1) + total;
 }
 
 } // namespace detail
@@ -369,12 +372,7 @@ class CountTest {
                     const Variant& c = variants.at((i + 2) % 3);
 
                     double prob = detail::prob_1_beats_23(
-                        a.events,
-                        a.exposure,
-                        b.events,
-                        b.exposure,
-                        c.events,
-                        c.exposure
+                        a.events, a.exposure, b.events, b.exposure, c.events, c.exposure
                     );
 
                     probs.push_back(prob);

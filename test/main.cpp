@@ -81,46 +81,49 @@ void test_binary_four_variants() {
 
 void test_binary_five_variants() {
     BinaryTest test;
-    assert_exception<std::runtime_error>([&]() {
-        for (int i = 0; i < 5; i++) {
-            test.add(2, 1);
-        }
-    }, "too many variants");
+    assert_exception<std::runtime_error>(
+        [&]() {
+            for (int i = 0; i < 5; i++) {
+                test.add(2, 1);
+            }
+        },
+        "too many variants"
+    );
 }
 
 void test_binary_negative_participants() {
     BinaryTest test;
-    assert_exception<std::invalid_argument>([&]() {
-        test.add(-1, 1);
-    }, "participants cannot be negative");
+    assert_exception<std::invalid_argument>(
+        [&]() { test.add(-1, 1); }, "participants cannot be negative"
+    );
 }
 
 void test_binary_high_participants() {
     BinaryTest test;
-    assert_exception<std::invalid_argument>([&]() {
-        test.add(std::numeric_limits<int>::max(), 1);
-    }, "too many participants");
+    assert_exception<std::invalid_argument>(
+        [&]() { test.add(std::numeric_limits<int>::max(), 1); }, "too many participants"
+    );
 }
 
 void test_binary_negative_conversions() {
     BinaryTest test;
-    assert_exception<std::invalid_argument>([&]() {
-        test.add(1, -1);
-    }, "conversions cannot be negative");
+    assert_exception<std::invalid_argument>(
+        [&]() { test.add(1, -1); }, "conversions cannot be negative"
+    );
 }
 
 void test_binary_high_conversions() {
     BinaryTest test;
-    assert_exception<std::invalid_argument>([&]() {
-        test.add(1, std::numeric_limits<int>::max());
-    }, "too many conversions");
+    assert_exception<std::invalid_argument>(
+        [&]() { test.add(1, std::numeric_limits<int>::max()); }, "too many conversions"
+    );
 }
 
 void test_binary_more_conversions() {
     BinaryTest test;
-    assert_exception<std::invalid_argument>([&]() {
-        test.add(1, 2);
-    }, "conversions cannot be greater than participants");
+    assert_exception<std::invalid_argument>(
+        [&]() { test.add(1, 2); }, "conversions cannot be greater than participants"
+    );
 }
 
 void test_count_no_variants() {
@@ -159,11 +162,14 @@ void test_count_three_variants() {
 
 void test_count_four_variants() {
     CountTest test;
-    assert_exception<std::runtime_error>([&]() {
-        for (int i = 0; i < 5; i++) {
-            test.add(2, 1);
-        }
-    }, "too many variants");
+    assert_exception<std::runtime_error>(
+        [&]() {
+            for (int i = 0; i < 5; i++) {
+                test.add(2, 1);
+            }
+        },
+        "too many variants"
+    );
 }
 
 void test_count_exposure_relative() {
@@ -178,30 +184,30 @@ void test_count_exposure_relative() {
 
 void test_count_negative_events() {
     CountTest test;
-    assert_exception<std::invalid_argument>([&]() {
-        test.add(-1, 1);
-    }, "events cannot be negative");
+    assert_exception<std::invalid_argument>(
+        [&]() { test.add(-1, 1); }, "events cannot be negative"
+    );
 }
 
 void test_count_high_events() {
     CountTest test;
-    assert_exception<std::invalid_argument>([&]() {
-        test.add(std::numeric_limits<int>::max(), 1);
-    }, "too many events");
+    assert_exception<std::invalid_argument>(
+        [&]() { test.add(std::numeric_limits<int>::max(), 1); }, "too many events"
+    );
 }
 
 void test_count_negative_exposure() {
     CountTest test;
-    assert_exception<std::invalid_argument>([&]() {
-        test.add(1, -1);
-    }, "exposure cannot be negative");
+    assert_exception<std::invalid_argument>(
+        [&]() { test.add(1, -1); }, "exposure cannot be negative"
+    );
 }
 
 void test_count_high_exposure() {
     CountTest test;
-    assert_exception<std::invalid_argument>([&]() {
-        test.add(1, std::numeric_limits<int>::max());
-    }, "too high exposure");
+    assert_exception<std::invalid_argument>(
+        [&]() { test.add(1, std::numeric_limits<int>::max()); }, "too high exposure"
+    );
 }
 
 void test_prob_b_beats_a() {
