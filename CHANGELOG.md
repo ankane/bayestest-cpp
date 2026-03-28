@@ -1,3 +1,7 @@
+## 0.2.0 (unreleased)
+
+- Improved validation for `add` methods
+
 ## 0.1.2 (2025-02-01)
 
 - Fixed visibility of private functions
