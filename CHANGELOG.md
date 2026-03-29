@@ -1,4 +1,4 @@
-## 0.2.0 (unreleased)
+## 0.2.0 (2026-03-28)
 
 - Improved validation for `add` methods
 

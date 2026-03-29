@@ -1,5 +1,5 @@
 /*
- * BayesTest C++ v0.1.2
+ * BayesTest C++ v0.2.0
  * https://github.com/ankane/bayestest-cpp
  * MIT License
  */
